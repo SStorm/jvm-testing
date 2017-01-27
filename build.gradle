@@ -1,0 +1,24 @@
+group 'io.imont.sdk'
+version '0.1-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+
+apply plugin: 'application'
+
+distZip.enabled = false // Just keep the tar as it includes file permissions
+configurations.archives.with {
+    artifacts.remove artifacts.find { it.archiveTask.is distZip }
+}
+
+mainClassName = "io.imont.sdk.skelmir.SQLiteMain"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile "com.neuronrobotics:nrjavaserial:3.11.0"
+}
